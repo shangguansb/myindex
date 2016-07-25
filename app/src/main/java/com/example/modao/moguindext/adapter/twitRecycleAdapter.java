@@ -5,12 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.Xml;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,15 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.engine.Resource;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.example.modao.moguindext.MainActivity;
 import com.example.modao.moguindext.R;
 import com.example.modao.moguindext.Utils.MoguUtils;
@@ -43,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by jamase on 2016-04-09.
  */
-public class twitRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TwitRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public String[] str;
     public ArrayList contentID = new ArrayList<>();
     List<RelativeLayout> rela_list = null;
@@ -53,7 +47,7 @@ public class twitRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int currentPage = 0;
     public ViewPager mmViewpager;
 
-    public twitRecycleAdapter(Context context, String[] datas) {
+    public TwitRecycleAdapter(Context context, String[] datas) {
         str = datas;
         this.context = context;
         initPopWindow();
@@ -172,7 +166,7 @@ public class twitRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             rela_list.add(rel2);
             rela_list.add(rel3);
             rela_list.add(rel4);
-            itemViewpagerAdapter adapter = new itemViewpagerAdapter(rela_list);
+            RecyclerViewItemViewpagerAdapter adapter = new RecyclerViewItemViewpagerAdapter(rela_list);
             mViewPager.setAdapter(adapter);
 //            mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
             mViewPager.setOnTouchListener(new View.OnTouchListener() {

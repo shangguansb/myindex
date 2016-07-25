@@ -16,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.modao.moguindext.Utils.ImageLoader.MoguImageJsonLoader;
 import com.example.modao.moguindext.Utils.ImageLoader.MoguResponse;
 import com.example.modao.moguindext.Utils.MoguRefreshPage;
+import com.example.modao.moguindext.adapter.RecyclerAdapter;
 import com.example.modao.moguindext.wedgit.MoguLinearLayout;
 
 import android.support.design.widget.CoordinatorLayout;
@@ -40,7 +41,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.modao.moguindext.adapter.twitRecycleAdapter;
 import com.example.modao.moguindext.wedgit.MySwipeRefreshLayout;
 
 import android.widget.LinearLayout;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     RecyclerView.LayoutManager mLayoutManager;
     String[] s = new String[]{"dwda", "dwhnudh", "dwhnudh",
             "dwhnudh", "dwhnudh", "dwhnudh", "dwhnudh", "dwhnudh", "dwhnudh"};
-    public twitRecycleAdapter madapter;
+    public RecyclerAdapter madapter;
     MySwipeRefreshLayout swipeRefreshLayout;
 
     ViewPager mViewPager;
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerview.setLayoutManager(mLayoutManager);
         mRecyclerview.setHasFixedSize(true);
-        madapter = new twitRecycleAdapter(this, s);
+        madapter = new RecyclerAdapter(this, s);
         mRecyclerview.setAdapter(madapter);
 //        mRecyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mViewPager.setOnTouchListener(new View.OnTouchListener() {
@@ -553,7 +553,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     public void openactivity() {
         Intent intent = new Intent();
-        intent.setClass(MainActivity.this, actIndicator.class);
+        intent.setClass(MainActivity.this, ActIndicator.class);
         intent.putExtra("msg", msg);
         startActivity(intent);
     }

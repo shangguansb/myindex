@@ -8,7 +8,7 @@ import android.widget.TextView;
 /**
  * Created by modao on 16/7/12.
  */
-public class actIndicator  extends AppCompatActivity{
+public class ActIndicator extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

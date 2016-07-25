@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * Created by modao on 16/7/13.
  */
-public class itemViewpagerAdapter extends PagerAdapter {
+public class RecyclerViewItemViewpagerAdapter extends PagerAdapter {
     List<RelativeLayout> list;
 
-    itemViewpagerAdapter(List<RelativeLayout> list) {
+    RecyclerViewItemViewpagerAdapter(List<RelativeLayout> list) {
         this.list = list;
     }
 
