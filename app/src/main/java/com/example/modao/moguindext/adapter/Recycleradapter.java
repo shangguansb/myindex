@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -120,20 +119,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             img2.setBackgroundResource(R.drawable.viewpager);
             img3.setBackgroundResource(R.drawable.threepage);
             img4.setBackgroundResource(R.drawable.page4);
-            Bitmap bitmap1 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.avator);
-            Bitmap bitmap2 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.viewpager);
-            Bitmap bitmap3 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.threepage);
-            Bitmap bitmap4 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.page4);
-            bitmapHeight1 = bitmap1.getHeight();
-            bitmapHeight2 = bitmap2.getHeight();
-            bitmapHeight3 = bitmap3.getHeight();
-            int bitmapHeight4 = bitmap4.getHeight();
+//            Bitmap bitmap1 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.avator);
+//            Bitmap bitmap2 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.viewpager);
+//            Bitmap bitmap3 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.threepage);
+//            Bitmap bitmap4 = BitmapFactory.decodeResource(mView.getContext().getResources(), R.drawable.page4);
+            bitmapHeight1 = mView.getContext().getResources().getDrawable(R.drawable.avator).getIntrinsicHeight();
+            bitmapHeight2 = mView.getContext().getResources().getDrawable(R.drawable.viewpager).getIntrinsicHeight();
+            bitmapHeight3 = mView.getContext().getResources().getDrawable(R.drawable.threepage).getIntrinsicHeight();
+            int bitmapHeight4 = mView.getContext().getResources().getDrawable(R.drawable.page4).getIntrinsicHeight();
             mItemParentLinearLayout.measure(RecyclerView.LayoutParams.WRAP_CONTENT, RecyclerView.LayoutParams.WRAP_CONTENT);
             mvpagerWidth = mItemParentLinearLayout.getMeasuredWidth();
-            heights[0] = bitmapHeight1 * mvpagerWidth / bitmap1.getWidth();
-            heights[1] = bitmapHeight2 * mvpagerWidth / bitmap2.getWidth();
-            heights[2] = bitmapHeight3 * mvpagerWidth / bitmap3.getWidth();
-            heights[3] = bitmapHeight4 * mvpagerWidth / bitmap4.getWidth();
+            heights[0] = bitmapHeight1 * mvpagerWidth / mView.getContext().getResources().getDrawable(R.drawable.avator).getIntrinsicWidth();
+            ;
+            heights[1] = bitmapHeight2 * mvpagerWidth / mView.getContext().getResources().getDrawable(R.drawable.viewpager).getIntrinsicWidth();
+            heights[2] = bitmapHeight3 * mvpagerWidth / mView.getContext().getResources().getDrawable(R.drawable.threepage).getIntrinsicWidth();
+            heights[3] = bitmapHeight4 * mvpagerWidth / mView.getContext().getResources().getDrawable(R.drawable.page4).getIntrinsicWidth();
             img1.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             img2.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             img3.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -153,8 +153,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             int margintop = MoguUtils.DipToPixels(itemView.getContext(), 230);
             RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(MoguUtils.DipToPixels(itemView.getContext(), 11)
                     , MoguUtils.DipToPixels(itemView.getContext(), 11));
-//            p.width =;
-//            p.height = 30;
             p.leftMargin = marginlaft;
             p.topMargin = margintop;
             point.setLayoutParams(p);
@@ -169,6 +167,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ViewPager.OnPageChangeListener listener = new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    Log.e("---viewpager", "position：" + position + "--getCurrentItem:" + mViewPager.getCurrentItem());
+
                     if (mViewPager.getChildAt(1) != null) {
 //                                                           ((RelativeLayout) mViewPager.getChildAt(1)).getChildAt(0).getHeight();
                         LinearLayout.LayoutParams ls = (LinearLayout.LayoutParams) mViewPager.getLayoutParams();
@@ -185,7 +185,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 scale = heights[position + 1] / (float) ls.height;
                                 mImageViews.get(position + 1).setScaleX(1);
                                 mImageViews.get(position + 1).setScaleY(scale);
-//                                mImageViews.get(position + 1).getDrawable().setBounds(new Rect(0,top,ls.width,bottom));
                             } else {
                                 float scale = ((float) ls.height) / heights[position + 1];
                                 mImageViews.get(position + 1).setScaleX(scale);
@@ -194,10 +193,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 mImageViews.get(position).setScaleX(1);
                                 mImageViews.get(position).setScaleY(scale);
 
-//                                mImageViews.get(position).getDrawable().setBounds(new Rect(0,top,ls.width,bottom));
                             }
                         }
-                        Log.e("-------------viewpager", position + "--------" + sc);
 //
                     }
                 }
@@ -212,7 +209,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                 }
             };
-            mViewPager.setOnPageChangeListener(listener);
+            mViewPager.addOnPageChangeListener(listener);
             mPopView.setOnClickListener(new View.OnClickListener()
 
                                         {
@@ -317,6 +314,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
     }
 
+    public void ondestroy() {
+        rela_list.clear();
+        rela_list = null;
+
+    }
 
 }
 

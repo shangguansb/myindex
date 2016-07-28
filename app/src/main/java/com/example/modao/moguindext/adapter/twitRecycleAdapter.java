@@ -47,6 +47,7 @@ public class TwitRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int currentPage = 0;
     public ViewPager mmViewpager;
 
+
     public TwitRecycleAdapter(Context context, String[] datas) {
         str = datas;
         this.context = context;
@@ -88,6 +89,7 @@ public class TwitRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
         public MyViewHolder1(View itemView) {
+
             super(itemView);
             mView = itemView;
             view = itemView;

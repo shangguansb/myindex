@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public RecyclerAdapter madapter;
     MySwipeRefreshLayout swipeRefreshLayout;
 
+
+
     ViewPager mViewPager;
     private List<ImageView> list = new ArrayList<ImageView>();
     private List<ImageView> pointList = new ArrayList<ImageView>();
